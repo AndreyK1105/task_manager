@@ -7,7 +7,7 @@ import 'package:task_manager/shared/domain/entities/todo/task.dart';
 
 class Day {
   List<Task> tasks;
-  DateTime data;
+  int data;
   Day({
     required this.tasks,
     required this.data,
@@ -15,7 +15,7 @@ class Day {
 
   Day copyWith({
     List<Task>? tasks,
-    DateTime? data,
+    int? data,
   }) {
     return Day(
       tasks: tasks ?? this.tasks,
@@ -26,7 +26,7 @@ class Day {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'tasks': tasks.map((x) => x.toMap()).toList(),
-      'data': data.millisecondsSinceEpoch,
+      'data': data,
     };
   }
 
@@ -37,7 +37,7 @@ class Day {
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      data: DateTime.fromMillisecondsSinceEpoch(map['data'] as int),
+      data: map['data'] as int,
     );
   }
 

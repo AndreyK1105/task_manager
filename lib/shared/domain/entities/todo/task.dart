@@ -9,6 +9,7 @@ part 'task.g.dart';
 class Task {
   Id id = Isar.autoIncrement;
   String description;
+  @Index()
   int date;
   int timeStart;
   int timeEnd;

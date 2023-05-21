@@ -3,16 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
+import 'package:task_manager/features/todo/presentation/screens/todo_days.dart';
 
 import '../../../../config/providers.dart';
 import '../../../../shared/domain/entities/check/check_list.dart';
 import '../../../../shared/domain/entities/todo/task.dart';
+import '../../../todo/presentation/screens/todo_header.dart';
 import '../widgets/check_header.dart';
 import '../widgets/check_list.dart';
 import '../widgets/note_header.dart';
 import '../widgets/note_list.dart';
-import '../widgets/todo_days.dart';
-import '../widgets/todo_header.dart';
 import '../widgets/todo_task_day.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -24,6 +24,7 @@ class HomeScreen extends ConsumerWidget {
     final bool pinned = true;
     final bool floating = false;
     List<Widget> sliverList1 = [];
+    const padding = EdgeInsets.symmetric(horizontal: 10.0, vertical: 3);
     // sliverList1.addAll(sliverList(size));
     //sliverList1.add(Todo());
     return Scaffold(
@@ -41,13 +42,23 @@ class HomeScreen extends ConsumerWidget {
               const TodoHeader(),
               SliverList(
                   delegate: SliverChildListDelegate(<Widget>[
-                const TodoDays(),
-                const TodoTaskDay(),
+                const SizedBox(height: 3),
+                Padding(
+                  padding: padding,
+                  child: TodoDays(),
+                ),
+                const Padding(
+                  padding: padding,
+                  child: TodoTaskDay(),
+                ),
               ])),
               const CheckHeader(),
               SliverList(
                   delegate: SliverChildListDelegate(<Widget>[
-                const CheckListWidget(),
+                const Padding(
+                  padding: padding,
+                  child: CheckListWidget(),
+                ),
               ])),
               NoteHeader(),
               SliverList(
@@ -71,9 +82,16 @@ class HeaderDelegat extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox.expand(
-        child:
-            Container(color: Color.fromARGB(255, 117, 163, 194), child: child));
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: SizedBox.expand(
+          child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7),
+                  color: Color.fromARGB(255, 161, 223, 192)),
+              // color: Color.fromARGB(255, 117, 194, 149),
+              child: child)),
+    );
 
     // Row(
     //   children: [

@@ -13,8 +13,8 @@ class NoteHeader extends StatelessWidget {
         pinned: true,
         floating: false,
         delegate: HeaderDelegat(
-          maxExtent: 50,
-          minExtent: 30,
+          maxExtent: 60,
+          minExtent: 50,
           child: Row(
             children: [
               const Text('Notes'),

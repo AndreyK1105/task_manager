@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:task_manager/features/todo/domain/repositories/todo_repository.dart';
 import 'package:task_manager/features/todo/presentation/providers/state/todo_notifer.dart';
 import 'package:task_manager/features/todo/presentation/providers/state/todo_state.dart';
 
@@ -9,10 +10,13 @@ import '../../domain/providers/todo_providers.dart';
 //   return   TodoNotifer(todoRepository:await  repository);
 // });
 
-final todoNotiferProvider =StateNotifierProvider<TodoNotifer, TodoState> ((ref)  {
+final todoNotiferProvider = StateNotifierProvider<TodoNotifer, TodoState>(
+  (ref) {
+    print('todo state provider');
+    final repository = ref.watch(todoRepositoryProvider);
 
-  final repository=ref.watch(todoRepositoryProvider.future);
+    TodoRepository todoRepository = repository;
 
-
-  return TodoNotifer(todoRepository:  repository); ..getDays();
-} ,);
+    return TodoNotifer(todoRepository: repository)..getDays();
+  },
+);

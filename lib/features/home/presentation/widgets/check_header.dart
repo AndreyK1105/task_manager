@@ -11,10 +11,10 @@ class CheckHeader extends StatelessWidget {
       pinned: true,
       floating: false,
       delegate: HeaderDelegat(
-        maxExtent: 50,
-        minExtent: 30,
-        child: Row(
-          children: const [
+        maxExtent: 60,
+        minExtent: 50,
+        child: const Row(
+          children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Text('Check List'),

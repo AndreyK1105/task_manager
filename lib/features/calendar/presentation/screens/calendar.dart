@@ -29,7 +29,7 @@ class _CalendarState extends ConsumerState<Calendar> {
     // TODO: implement initState
     // initIsar();
 
-    ref.read(isarProvider);
+    ref.read(isarProviderTask);
   }
 
   // void initIsar() async {
@@ -37,7 +37,7 @@ class _CalendarState extends ConsumerState<Calendar> {
   //   serviceDb = ServiceDb(isar: isar);
   // }
   Future<Task> getTask() async {
-    Isar isar = await ref.read(isarProvider.future);
+    Isar isar = await ref.read(isarProviderTask.future);
     final task = isar.tasks.get(-9223372036854775808) as Task;
 //task.then((value) => )
     return task;

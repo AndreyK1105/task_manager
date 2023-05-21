@@ -41,7 +41,7 @@ class TodoHeader extends ConsumerWidget {
                       reminder: 0,
                       color: 2);
                   print('task.Id====${task.id}');
-                  Isar isar = await ref.read(isarProvider.future);
+                  Isar isar = await ref.read(isarProviderTask.future);
                   await isar.writeTxn(() async {
                     await isar.tasks.put(task);
                   });

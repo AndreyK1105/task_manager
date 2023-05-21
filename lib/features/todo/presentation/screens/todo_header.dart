@@ -7,6 +7,8 @@ import 'package:isar/isar.dart';
 import '../../../../config/providers.dart';
 import '../../../../shared/domain/entities/todo/task.dart';
 import '../../../home/presentation/screens/home_screen.dart';
+import '../../domain/providers/todo_providers.dart';
+import '../providers/todo_state_provider.dart';
 
 class TodoHeader extends ConsumerWidget {
   const TodoHeader({super.key});
@@ -17,8 +19,8 @@ class TodoHeader extends ConsumerWidget {
         pinned: true,
         floating: false,
         delegate: HeaderDelegat(
-          maxExtent: 50,
-          minExtent: 30,
+          maxExtent: 60,
+          minExtent: 50,
           child: Row(
             children: [
               const Text('Todo List'),
@@ -33,18 +35,32 @@ class TodoHeader extends ConsumerWidget {
               ),
               OutlinedButton(
                 onPressed: () async {
+                  DateTime now = DateTime.now();
+                  int data = DateTime(now.year, now.month, now.day)
+                      .millisecondsSinceEpoch;
+                  //   print('time int=================$data');
+                  final dataf = DateTime.fromMillisecondsSinceEpoch(data);
+
                   final Task task = Task(
                       description: 'description',
-                      date: DateTime.now().millisecondsSinceEpoch,
+                      date: data,
                       timeStart: 0,
                       timeEnd: 0,
                       reminder: 0,
                       color: 2);
-                  print('task.Id====${task.id}');
-                  Isar isar = await ref.read(isarProvider.future);
-                  await isar.writeTxn(() async {
-                    await isar.tasks.put(task);
-                  });
+                  // print('task.Id====${task.id}');
+                  // Isar isar = await ref.read(isarProviderTask.future);
+                  // await isar.writeTxn(() async {
+                  //   await isar.tasks.put(task);
+                  // });
+
+                  // Isar isar = await ref.read(isarProviderTask.future);
+                  // await isar.writeTxn(() async {
+                  //   await isar.tasks.put(task);
+                  // });
+                  print('object${dataf}');
+                  ref.read(todoNotiferProvider.notifier).newTask(task);
+                  //  ref.read(todoNotiferProvider.notifier).getDays();
                 },
                 style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(

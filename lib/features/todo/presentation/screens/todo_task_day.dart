@@ -7,7 +7,7 @@ class TodoTaskDay extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
       child: Container(
         //height: 30,
         decoration: BoxDecoration(

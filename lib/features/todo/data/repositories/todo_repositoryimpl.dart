@@ -1,16 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:task_manager/features/todo/domain/repositories/todo_repository.dart';
 
+import '../../../../shared/domain/entities/todo/day.dart';
+import '../../../../shared/domain/entities/todo/task.dart';
 import '../datasources/local_datasource.dart';
 
 class TodoRepopsitoryImpl implements TodoRepository {
-  TodoLocalDatasource todoLocalDatasource;
+  TodoDataSource todoDatasource;
   TodoRepopsitoryImpl({
-    required this.todoLocalDatasource,
+    required this.todoDatasource,
   });
   @override
-  Future getDays() {
-    // TODO: implement getDays
-    throw UnimplementedError();
+  Future<List<Day>> getDays() {
+    return todoDatasource.getDays();
+  }
+
+  @override
+  Future newTask(Task task) {
+    return todoDatasource.newTask(task);
   }
 }
