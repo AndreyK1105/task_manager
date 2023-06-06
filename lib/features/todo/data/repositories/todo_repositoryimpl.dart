@@ -19,4 +19,9 @@ class TodoRepopsitoryImpl implements TodoRepository {
   Future newTask(Task task) {
     return todoDatasource.newTask(task);
   }
+
+  @override
+  Future<void> deleteTask(Task task) {
+    return todoDatasource.updateTask(task);
+  }
 }

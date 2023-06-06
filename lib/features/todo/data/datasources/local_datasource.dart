@@ -9,6 +9,7 @@ import '../../../../shared/domain/entities/todo/task.dart';
 abstract class TodoDataSource {
   Future<List<Day>> getDays();
   Future<void> newTask(Task task);
+  Future<void> updateTask(Task task);
 }
 
 class TodoLocalDatasource extends TodoDataSource {
@@ -28,5 +29,10 @@ class TodoLocalDatasource extends TodoDataSource {
   @override
   Future<void> newTask(Task task) async {
     return localService.newTask(task);
+  }
+
+  @override
+  Future<void> updateTask(Task task) {
+    return localService.deleteTask(task);
   }
 }

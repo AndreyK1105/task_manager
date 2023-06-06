@@ -16,24 +16,32 @@ enum TodoConreteState {
 class TodoState {
   final List<Day> days;
   final TodoConreteState state;
-  final int todayIndex;
+  final int curentIndex;
+  //final ScrollController scrollController;
   TodoState(
     this.days,
     this.state,
-    this.todayIndex,
+    this.curentIndex,
+    //this.scrollController,
   );
-  TodoState.initial({
+  const TodoState.initial({
     this.days = const [],
     this.state = TodoConreteState.initial,
-    this.todayIndex = 0,
+    this.curentIndex = 0,
+    // this.scrollController =  ScrollController(),
   });
-
   TodoState copyWith({
     List<Day>? days,
     TodoConreteState? state,
-    int? todayIndex,
+    int? curentIndex,
+    //  ScrollController? scrollController,
   }) {
+    // print('todo state copyWith');
     return TodoState(
-        days ?? this.days, state ?? this.state, todayIndex ?? this.todayIndex);
+      days ?? this.days,
+      state ?? this.state,
+      curentIndex ?? this.curentIndex,
+//      scrollController ?? this.scrollController,
+    );
   }
 }

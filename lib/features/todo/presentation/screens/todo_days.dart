@@ -9,17 +9,21 @@ import '../providers/todo_state_provider.dart';
 
 class TodoDays extends ConsumerWidget {
   TodoDays({Key? key}) : super(key: key);
-  ScrollController controller = ScrollController();
+  // late ScrollController controller;
+
+  ///ScrollController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var controller = ref.watch(todoDaysScrollController);
     final Size size = MediaQuery.of(context).size;
 
-    TodoState state = ref.watch(todoNotiferProvider);
+    //TodoState state = ref.watch(todoNotiferProvider);
     final width = 50.0;
     //MediaQuery.of(context).size.width;
+    final days = ref.watch(todoNotiferProvider).days;
 
-    final days = state.days;
+    //final days = state.days;
     final itemCount = days.isEmpty ? 1 : days.length;
     return SizedBox(
       height: 22,
@@ -29,18 +33,24 @@ class TodoDays extends ConsumerWidget {
           scrollDirection: Axis.horizontal,
           itemCount: itemCount,
           itemBuilder: ((context, index) {
+            //  print('scrollController.hashCode====${controller.hashCode}');
             return Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    final contentSize = controller.position.viewportDimension +
-                        controller.position.maxScrollExtent;
-                    final target = contentSize * 3 / itemCount;
-                    print('widht==$width');
-                    controller.position.animateTo(target,
-                        duration: const Duration(milliseconds: 1500),
-                        curve: Curves.linear);
+                    ref
+                        .watch(todoNotiferProvider.notifier)
+                        .setIndex(ref, index);
+                    // ref.watch(todoNotiferProvider.notifier).setTodayIndex(ref);
+
+                    // final contentSize = controller.position.viewportDimension +
+                    //     controller.position.maxScrollExtent;
+                    // final target = contentSize * 3 / itemCount;
+                    // print('widht==$width');
+                    // controller.position.animateTo(target,
+                    //     duration: const Duration(milliseconds: 1500),
+                    //     curve: Curves.linear);
                   },
                   style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(

@@ -31,8 +31,10 @@ class IsarService extends LocalService {
   Future<List<Day>> getDays() async {
     Isar isar = await initialize();
     return await isar.writeTxn(() async {
-      final tasks = await isar.tasks.where().findAll();
-
+      final tasks = await isar.tasks.where().anyDate().findAll();
+      for (int i = 0; i < tasks.length; i++) {
+        // print('isar service todo  ${tasks[i].date}');
+      }
       List<Day> days = [];
       List<Task> taskDay = [];
       Day day = Day(tasks: [], data: 0);
@@ -52,7 +54,7 @@ class IsarService extends LocalService {
 
             day.tasks.addAll(taskDay);
             day.data = tasks[i].date;
-            print('isar_serv_todo  lengh days======${days.last.tasks.length}');
+            // print('isar_serv_todo  lengh days======${days.last.tasks.length}');
             days.add(day);
           }
         }
@@ -64,10 +66,18 @@ class IsarService extends LocalService {
 
   @override
   Future<void> newTask(Task task) async {
-    print('isar_serv_todo');
+    print('isar_serv_todo---${task.description}');
     Isar isar = await initialize();
     return await isar.writeTxn(() {
       return isar.tasks.put(task);
+    });
+  }
+
+  @override
+  Future<void> deleteTask(Task task) async {
+    Isar isar = await initialize();
+    return await isar.writeTxn(() {
+      return isar.tasks.delete(task.id);
     });
   }
 }

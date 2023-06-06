@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:task_manager/features/todo/presentation/screens/todo_days.dart';
+import 'package:task_manager/features/todo/presentation/screens/todo_task_day.dart';
 
 import '../../../../config/providers.dart';
 import '../../../../shared/domain/entities/check/check_list.dart';
@@ -13,7 +14,6 @@ import '../widgets/check_header.dart';
 import '../widgets/check_list.dart';
 import '../widgets/note_header.dart';
 import '../widgets/note_list.dart';
-import '../widgets/todo_task_day.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -37,8 +37,10 @@ class HomeScreen extends ConsumerWidget {
           child: CustomScrollView(
             slivers:
                 // sliverList1,
-                <Widget>[
+
+                [
               //sliverList(size),
+
               const TodoHeader(),
               SliverList(
                   delegate: SliverChildListDelegate(<Widget>[
