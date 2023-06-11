@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_manager/shared/domain/entities/todo/task.dart';
 
-dialogNewTask(BuildContext context, WidgetRef ref, Task task) {
+dialogNewTask(BuildContext context, Task task) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {
-        DateTime dateNow = DateTime.now();
-        TimeOfDay timeStart = const TimeOfDay(hour: 7, minute: 0);
-        TimeOfDay timeEnd = const TimeOfDay(hour: 8, minute: 0);
+        DateTime dateNow = DateTime.fromMillisecondsSinceEpoch(task.date);
+        TimeOfDay timeStart = TimeOfDay(
+            hour: DateTime.fromMillisecondsSinceEpoch(task.timeStart).hour,
+            minute: DateTime.fromMillisecondsSinceEpoch(task.timeStart).minute);
+        TimeOfDay timeEnd = TimeOfDay(
+            hour: DateTime.fromMillisecondsSinceEpoch(task.timeEnd).hour,
+            minute: DateTime.fromMillisecondsSinceEpoch(task.timeEnd).minute);
         String description = '';
 
         TextEditingController textEditingController =
@@ -102,7 +106,7 @@ dialogNewTask(BuildContext context, WidgetRef ref, Task task) {
                           },
                           child: Text(
                               'Start-${timeStart.toString().substring(10, 15)}')),
-                      Expanded(
+                      const Expanded(
                         child: SizedBox(
                           width: 10,
                         ),

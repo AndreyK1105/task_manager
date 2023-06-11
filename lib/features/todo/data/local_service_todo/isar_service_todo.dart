@@ -1,6 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:task_manager/shared/domain/entities/check/check_list.dart';
+import 'package:task_manager/shared/services/tasksToDays.dart';
 
 import '../../../../shared/data/local_service/local_service.dart';
 import '../../../../shared/domain/entities/todo/day.dart';
@@ -32,35 +33,33 @@ class IsarService extends LocalService {
     Isar isar = await initialize();
     return await isar.writeTxn(() async {
       final tasks = await isar.tasks.where().anyDate().findAll();
-      for (int i = 0; i < tasks.length; i++) {
-        // print('isar service todo  ${tasks[i].date}');
-      }
-      List<Day> days = [];
-      List<Task> taskDay = [];
-      Day day = Day(tasks: [], data: 0);
-      for (int i = 0; i < tasks.length; i++) {
-        if (i == 0) {
-          taskDay.add(tasks[i]);
-          day.tasks.addAll(taskDay);
-          day.data = tasks[i].date;
-          days.add(day);
-        } else {
-          if (i > 0 && tasks[i].date == tasks[i - 1].date) {
-            days.last.tasks.add(tasks[i]);
-          } else {
-            taskDay.clear();
-            Day day = Day(tasks: [], data: 0);
-            taskDay.add(tasks[i]);
+      return taskToDays(tasks);
+      // List<Day> days = [];
+      // List<Task> taskDay = [];
+      // Day day = Day(tasks: [], data: 0);
+      // for (int i = 0; i < tasks.length; i++) {
+      //   if (i == 0) {
+      //     taskDay.add(tasks[i]);
+      //     day.tasks.addAll(taskDay);
+      //     day.data = tasks[i].date;
+      //     days.add(day);
+      //   } else {
+      //     if (i > 0 && tasks[i].date == tasks[i - 1].date) {
+      //       days.last.tasks.add(tasks[i]);
+      //     } else {
+      //       taskDay.clear();
+      //       Day day = Day(tasks: [], data: 0);
+      //       taskDay.add(tasks[i]);
 
-            day.tasks.addAll(taskDay);
-            day.data = tasks[i].date;
-            // print('isar_serv_todo  lengh days======${days.last.tasks.length}');
-            days.add(day);
-          }
-        }
-      }
+      //       day.tasks.addAll(taskDay);
+      //       day.data = tasks[i].date;
+      //       // print('isar_serv_todo  lengh days======${days.last.tasks.length}');
+      //       days.add(day);
+      //     }
+      //   }
+      // }
 
-      return days;
+      // return days;
     });
   }
 

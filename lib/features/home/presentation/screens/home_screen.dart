@@ -2,16 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar/isar.dart';
+import 'package:task_manager/features/check/presentation/widgets/check_header.dart';
+import 'package:task_manager/features/check/presentation/widgets/check_list.dart';
 import 'package:task_manager/features/todo/presentation/screens/todo_days.dart';
 import 'package:task_manager/features/todo/presentation/screens/todo_task_day.dart';
 
-import '../../../../config/providers.dart';
-import '../../../../shared/domain/entities/check/check_list.dart';
-import '../../../../shared/domain/entities/todo/task.dart';
 import '../../../todo/presentation/screens/todo_header.dart';
-import '../widgets/check_header.dart';
-import '../widgets/check_list.dart';
 import '../widgets/note_header.dart';
 import '../widgets/note_list.dart';
 

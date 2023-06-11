@@ -48,7 +48,7 @@ class TodoNotifer extends StateNotifier<TodoState> {
       }
     }
     if (todayIndex == -1) {
-      days.insert(start, Day(tasks: [], data: todayData));
+      days.insert(start, Day(tasks: [], tasksComplited: [], data: todayData));
       state = state.copyWith(days: days, curentIndex: start);
       todayScrollIndex = start;
     } else {
@@ -94,6 +94,13 @@ class TodoNotifer extends StateNotifier<TodoState> {
     // print('TodoNotifer');
     await todoRepository.deleteTask(task);
 
+    getDays();
+  }
+
+  Future<void> changeComplited(Task task) async {
+    //bool done=task.done;
+    task.done = !task.done;
+    await todoRepository.newTask(task);
     getDays();
   }
 }

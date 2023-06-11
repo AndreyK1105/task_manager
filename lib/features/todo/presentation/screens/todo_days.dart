@@ -22,7 +22,7 @@ class TodoDays extends ConsumerWidget {
     final width = 50.0;
     //MediaQuery.of(context).size.width;
     final days = ref.watch(todoNotiferProvider).days;
-
+    int curentIndex = ref.watch(todoNotiferProvider).curentIndex;
     //final days = state.days;
     final itemCount = days.isEmpty ? 1 : days.length;
     return SizedBox(
@@ -53,12 +53,15 @@ class TodoDays extends ConsumerWidget {
                     //     curve: Curves.linear);
                   },
                   style: OutlinedButton.styleFrom(
+                      backgroundColor: index == curentIndex
+                          ? Colors.amberAccent
+                          : Color.fromARGB(255, 155, 187, 243),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15))),
                   child: Text(
                     days.isEmpty
                         ? 'Today'
-                        : '${(DateTime.fromMillisecondsSinceEpoch(days[index].data)).toString().substring(0, 10)} task${days[index].tasks.length}',
+                        : '${(DateTime.fromMillisecondsSinceEpoch(days[index].data)).toString().substring(0, 10)} task${days[index].tasks.length + days[index].tasksComplited.length}',
                   ),
                 ),
 

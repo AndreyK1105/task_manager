@@ -57,7 +57,7 @@ class TodoHeader extends ConsumerWidget {
                     timeEnd: timeEnd.hour, description: '', reminder: 0,
                   );
 
-                  var resp = await dialogNewTask(context, ref, task);
+                  var resp = await dialogNewTask(context, task);
                   if (resp.runtimeType == Task) {
                     Task task = resp;
                     print(
